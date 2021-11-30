@@ -3,9 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
 
 const routes: Routes = [
-  {
-   path:'', redirectTo:'auth', pathMatch: 'full' 
-  },
+
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
@@ -19,14 +17,15 @@ const routes: Routes = [
     loadChildren: () => import('./user/user.module').then(m => m.UserModule )
   },
   {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full'
+    path: "**",
+    redirectTo: 'auth'
   }
+
+  
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,  { enableTracing: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
